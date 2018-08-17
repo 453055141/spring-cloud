@@ -1,0 +1,21 @@
+eureka:
+  client:
+    serviceUrl:
+      #注册中心的地址
+      defaultZone: http://localhost:8761/eureka/
+server:
+  #当前服务端口号
+  port: 8764
+spring:
+  application:
+    #当前应用名称
+    name: sms
+#启用断路器
+feige:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream

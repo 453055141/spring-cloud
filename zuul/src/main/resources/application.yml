@@ -1,0 +1,23 @@
+eureka:
+  client:
+    serviceUrl:
+      #注册中心的地址
+      defaultZone: http://localhost:8761/eureka/
+server:
+  #当前服务端口号
+  port: 8765
+spring:
+  application:
+    #当前应用名称
+    name: zuul
+zuul:
+  routes:
+    #自定义微服务名称
+    sso:
+      #路径
+      path: /sso/**
+      #微服务名称
+      serviceId: sso
+    sms:
+      path: /sms/**
+      serviceId:  sms
