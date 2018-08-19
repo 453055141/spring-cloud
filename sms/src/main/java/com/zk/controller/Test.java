@@ -19,12 +19,12 @@ public class Test {
     @RequestMapping(value = "test",method = RequestMethod.GET)
     public String getSmsTest(@RequestParam("sms") String sms){
         log.info("8764");
-        return "这是"+sms+"调用sms服务"+8764;
+        return "这是"+sms+"调用sms服务AA"+8764;
     }
 
     @RequestMapping(value = "testhystrix",method = RequestMethod.GET)
     public String getSmsTestHystrix(@RequestParam("sms") String sms){
         log.info("8764");
-        return "这是"+sms+"调用sms服务"+8764;
+        return "这是"+sms+"调用sms服务BB"+8764;
     }
 }

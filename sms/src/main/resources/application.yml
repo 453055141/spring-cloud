@@ -2,7 +2,7 @@ eureka:
   client:
     serviceUrl:
       #注册中心的地址
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://peer1:8000/eureka/
 server:
   #当前服务端口号
   port: 8764
@@ -10,6 +10,23 @@ spring:
   application:
     #当前应用名称
     name: sms
+  cloud:
+    stream:
+      binders: # 在此处配置要绑定的rabbitmq的服务信息；
+        defaultRabbit: # 表示定义的名称，用于于binding整合
+          type: rabbit # 消息组件类型
+          environment: # 设置rabbitmq的相关的环境配置
+            spring:
+              rabbitmq: rabbitmq
+              addresses: rabbitmq-server
+              username: zengkai
+              password: 123456
+              virtual-host: /
+      bindings: # 服务的整合处理
+        input: # 这个名字是一个通道的名称，在分析具体源代码的时候会进行说明
+          destination: testTopic # 表示要使用的Exchange名称定义
+          content-type: application/json # 设置消息类型，本次为对象json，如果是文本则设置“text/plain”
+          binder: defaultRabbit # 设置要绑定的消息服务的具体设置
 #启用断路器
 feige:
   hystrix:

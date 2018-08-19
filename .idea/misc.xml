@@ -1,49 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/eureka-service/pom.xml" />
-        <option value="$PROJECT_DIR$/sms/pom.xml" />
-        <option value="$PROJECT_DIR$/sso/pom.xml" />
         <option value="$PROJECT_DIR$/zuul/pom.xml" />
         <option value="$PROJECT_DIR$/turbine/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/pom.xml" />
+        <option value="$PROJECT_DIR$/sso/pom.xml" />
+        <option value="$PROJECT_DIR$/sms/pom.xml" />
         <option value="$PROJECT_DIR$/home/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka-service/pom.xml" />
+        <option value="$PROJECT_DIR$/stream/pom.xml" />
+        <option value="$PROJECT_DIR$/config/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/mapper/pom.xml" />
       </list>
-    </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$USER_HOME$/Desktop/zipkin-master/benchmarks/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-autoconfigure/collector-kafka/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-autoconfigure/collector-kafka08/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-autoconfigure/collector-rabbitmq/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-autoconfigure/collector-scribe/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-autoconfigure/metrics-prometheus/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-autoconfigure/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-autoconfigure/storage-cassandra/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-autoconfigure/storage-cassandra3/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-autoconfigure/storage-elasticsearch/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-autoconfigure/storage-mysql/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-autoconfigure/ui/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-collector/core/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-collector/kafka/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-collector/kafka08/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-collector/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-collector/rabbitmq/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-collector/scribe/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-junit/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-server/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-storage/cassandra-v1/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-storage/cassandra/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-storage/elasticsearch/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-storage/mysql-v1/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-storage/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin-ui/pom.xml" />
-        <option value="$USER_HOME$/Desktop/zipkin-master/zipkin/pom.xml" />
-      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">

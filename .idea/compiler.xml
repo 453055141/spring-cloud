@@ -2,56 +2,30 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="config" />
         <module name="eureka-service" />
+        <module name="gateway" />
         <module name="home" />
+        <module name="mapper" />
         <module name="sms" />
         <module name="spring-cloud" />
         <module name="sso" />
+        <module name="stream" />
         <module name="turbine" />
         <module name="zuul" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="benchmarks" target="1.8" />
-      <module name="eureka-service" target="1.8" />
-      <module name="home" target="1.8" />
-      <module name="parent" target="1.5" />
-      <module name="sms" target="1.8" />
-      <module name="spring-cloud" target="1.8" />
-      <module name="sso" target="1.8" />
-      <module name="turbine" target="1.8" />
-      <module name="zipkin" target="1.8" />
-      <module name="zipkin-autoconfigure" target="1.5" />
-      <module name="zipkin-autoconfigure-collector-kafka" target="1.8" />
-      <module name="zipkin-autoconfigure-collector-kafka08" target="1.8" />
-      <module name="zipkin-autoconfigure-collector-rabbitmq" target="1.8" />
-      <module name="zipkin-autoconfigure-collector-scribe" target="1.8" />
-      <module name="zipkin-autoconfigure-metrics-prometheus" target="1.8" />
-      <module name="zipkin-autoconfigure-storage-cassandra" target="1.8" />
-      <module name="zipkin-autoconfigure-storage-cassandra3" target="1.8" />
-      <module name="zipkin-autoconfigure-storage-elasticsearch" target="1.8" />
-      <module name="zipkin-autoconfigure-storage-mysql" target="1.8" />
-      <module name="zipkin-autoconfigure-ui" target="1.8" />
-      <module name="zipkin-collector" target="1.8" />
-      <module name="zipkin-collector-kafka" target="1.8" />
-      <module name="zipkin-collector-kafka08" target="1.8" />
-      <module name="zipkin-collector-parent" target="1.5" />
-      <module name="zipkin-collector-rabbitmq" target="1.8" />
-      <module name="zipkin-collector-scribe" target="1.8" />
-      <module name="zipkin-junit" target="1.8" />
-      <module name="zipkin-server" target="1.8" />
-      <module name="zipkin-service" target="1.8" />
-      <module name="zipkin-storage-cassandra" target="1.8" />
-      <module name="zipkin-storage-cassandra-v1" target="1.8" />
-      <module name="zipkin-storage-elasticsearch" target="1.8" />
-      <module name="zipkin-storage-mysql-v1" target="1.8" />
-      <module name="zipkin-storage-parent" target="1.5" />
-      <module name="zipkin-ui" target="1.8" />
-      <module name="zuul" target="1.8" />
+      <module name="aaa" target="1.8" />
+      <module name="bus" target="1.8" />
+      <module name="mybatisplus-spring-boot" target="1.8" />
+      <module name="zk-cloud-configclient" target="1.8" />
+      <module name="zk-cloud-configserver" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

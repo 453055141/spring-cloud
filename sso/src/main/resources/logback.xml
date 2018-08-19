@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 属性描述 scan：性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
+    debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
+<configuration debug="false">
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+    <property name="LOG_HOME" value="./log"/>
+    <!--读取spring容器中的属性，这里是获取项目名称和运行的服务器IP-->
+    <springProperty scope="context" name="springAppName" source="spring.application.name" />
+    <!--<springProperty scope="context" name="ip" source="spring.cloud.client.ipAddress" />-->
+    <!-- 控制台输出 -->
+    <!-- 彩色日志 -->
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <!-- Console 输出设置 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="logstash"
+              class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>127.0.0.1:9601</destination>
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
+                        "service": "${springAppName:-}",
+                        "trace": "%X{X-B3-TraceId:-}",
+                        "span": "%X{X-B3-SpanId:-}",
+                        "exportable": "%X{X-Span-Export:-}",
+                        "thread": "%thread",
+                        "level": "%level",
+                        "logger_name": "%logger",
+                        "class_name": "%class",
+                        "method_name": "%method",
+                        "line_number": "%line",
+                        "stack_trace": "%exception{5}",
+                        "message": "%message"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+
+    <!-- 按照每天生成日志文件 -->
+    <appender name="DAYINFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/info.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>5</MaxHistory>
+        </rollingPolicy>
+        <!--这里设置日志级别为info-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>debug</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <!--日志文件最大的大小-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!--新增加的error appender-->
+    <appender name="DAYERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/error.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>10</MaxHistory>
+        </rollingPolicy>
+        <!--这里设置日志级别为error-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>error</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <!--日志文件最大的大小-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!--&lt;!&ndash;多环境日志，文件名称不是logback.xml，想使用spring扩展profile支持，要以logback-spring.xml命名&ndash;&gt;-->
+    <!--<springProfile name="!pro">-->
+        <!--&lt;!&ndash;类的全路径 additivity是否向根节点传递，可能会打印两次&ndash;&gt;-->
+        <!--&lt;!&ndash;<logger name="org.springframework.web" level="INFO"  additivity="false"/>&ndash;&gt;-->
+        <!--<root level="debug">-->
+            <!--<appender-ref ref="stdout" />-->
+            <!--<appender-ref ref="dailyRollingFileAppender" />-->
+            <!--<appender-ref ref="logstash" />-->
+        <!--</root>-->
+    <!--</springProfile>-->
+
+    <!--<springProfile name="pro">-->
+        <!--<root level="debug">-->
+            <!--<appender-ref ref="STDOUT" />-->
+            <!--<appender-ref ref="dailyRollingFileAppender" />-->
+            <!--<appender-ref ref="logstash" />-->
+        <!--</root>-->
+    <!--</springProfile>-->
+
+    <!--TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF-->
+    <!-- logback的配置，需要配置输出源appender，打日志的loger（子节点）和root（根节点），
+    实际上，它输出日志是从子节点开始，子节点如果有输出源直接输入，如果无，判断配置的addtivity，
+    是否像上级传递，即是否向root传递，传递则采用root的输出源，否则不输出日志 -->
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="logstash"/>
+        <appender-ref ref="DAYINFO"/>
+        <appender-ref ref="DAYERROR"/>
+    </root>
+</configuration>

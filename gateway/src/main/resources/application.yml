@@ -1,0 +1,79 @@
+eureka:
+  client:
+    serviceUrl:
+      #注册中心的地址
+      defaultZone: http://peer1:8000/eureka/
+server:
+  #当前服务端口号
+  port: 8770
+spring:
+  application:
+    #当前应用名称
+    name: gateway
+    #选择配置文件类型
+  profiles:
+    active: test
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
+      probability: 1.0
+  zipkin:
+    # 指定了 Zipkin 服务器的地址
+    base-url: http://127.0.0.1:9411/
+    sender:
+      type: web
+  cloud:
+    gateway:
+      #启用网关
+      x-forwarded:
+        enabled: true
+      discovery:      #是否与服务发现组件进行结合，通过 serviceId(必须设置成大写) 转发到具体的服务实例。默认为false，设为true便开启通过服务中心的自动根据 serviceId 创建路由的功能。
+        locator:      #路由访问方式：http://Gateway_HOST:Gateway_PORT/大写的serviceId/**，其中微服务应用名默认大写访问。
+          enabled: true
+      routes:
+        #为了nginx能把请求都统一路由到gateway，所以必须要有一个统一的前缀
+      - id: SSO          #这个路由的唯一id，不定义的话为一个uuid
+        #http请求为lb://前缀 + 服务id；ws请求为lb:ws://前缀 + 服务id；表示将请求负载到哪一个服务上
+        uri: lb://sso
+        #表示这个路由的请求匹配规则，只有符合这个规则的请求才会走这个路由。为一个数组，每个规则为并且的关系
+        predicates:
+          - Path=/SSO/**
+        filters:
+          - StripPrefix = 1   #在向下游发送之前从请求中剥离的路径中的部分数 /SSO/aaa/BBB → /sso/aaa/BBB
+          - name: RequestRateLimiter
+            args:
+              redis-rate-limiter.replenishRate: 10    #希望允许用户每秒处理多少个请求，而不会丢失任何请求；
+              redis-rate-limiter.burstCapacity: 20    #是用户允许在一秒钟内完成的最大请求数，这是令牌桶可以容纳的令牌的数量，将此值设置为零将阻止所有请求。
+
+#      - id: i5xforyou-biz-kanjia-websocket
+#        uri: lb:ws://i5xforyou-biz-kanjia-websocket
+#        predicates:
+#          - Path= ${server.servlet.context-path}/kanjia-websocket/**
+#          #请求转发前的filter，为一个数组。
+#        filters:
+#          - StripPrefix= 1
+#      default-filters: #里面可以定义一些共同的filter，对所有路由都起作用
+
+logging:
+  level:
+    org.springframework.cloud.gateway: trace
+    org.springframework.http.server.reactive: debug
+    org.springframework.web.reactive: debug
+    reactor.ipc.netty: debug
+
+
+#启用断路器
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
