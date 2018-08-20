@@ -3,25 +3,51 @@ server:
 
 #spring
 spring:
+  #启用自动重启
   devtools:
     restart:
-      enabled: false
+      enabled: true
 
   # H2 DATABASE CONFIG
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    schema: classpath:/db/schema-h2.sql
-    data: classpath:/db/data-h2.sql
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password: sa
-    platform: h2
-    initialization-mode: always
-    continue-on-error: true
-  h2:
-    console:
-      enabled: true
-      path: /console
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://119.23.106.184:3306/zk_project?useUnicode=true&characterEncoding=utf8
+    username: zengkai
+    password: 1992111
+    druid:
+      url: jdbc:mysql://119.23.106.184:3306/zk_project?useUnicode=true&characterEncoding=utf8
+      username: zengkai
+      password: 1992111
+      initial-size: 10
+      min-idle: 5
+      max-active: 50
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: false
+      test-on-return: false
+      test-on-borrow: false
+      filters: stat,wall,slf4j,config
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      #webstat
+      web-stat-filter:
+        enabled: true
+        exclusions: *.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*
+      filter:
+        slf4j:
+          enabled: true
+          connection-log-enabled: true
+          connection-close-after-log-enabled: true
+          connection-commit-after-log-enabled: true
+          connection-connect-after-log-enabled: true
+          connection-connect-before-log-enabled: true
+          connection-log-error-enabled: true
+          data-source-log-enabled: true
+          result-set-log-enabled: true
+          statement-log-enabled: true
+
 
 #mybatis
 mybatis-plus:
@@ -43,7 +69,7 @@ mybatis-plus:
       #逻辑删除配置
       logic-delete-value: 0
       logic-not-delete-value: 1
-      db-type: h2
+#      db-type: h2
     #刷新mapper 调试神器
     refresh: true
   # 原生配置
