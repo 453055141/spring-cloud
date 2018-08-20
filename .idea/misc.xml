@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/config/pom.xml" />
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/mapper/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatisplus/pom.xml" />
       </list>
     </option>
   </component>

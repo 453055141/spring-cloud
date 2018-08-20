@@ -12,6 +12,7 @@
         <module name="gateway" />
         <module name="home" />
         <module name="mapper" />
+        <module name="mybatisplus" />
         <module name="sms" />
         <module name="spring-cloud" />
         <module name="sso" />
