@@ -26,4 +26,4 @@ spring:
           binder: defaultRabbit # 设置要绑定的消息服务的具体设置
   application:
     #当前应用名称
-    name: stream
+    name: service

@@ -22,6 +22,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <!-- maven方式跳过maven test, 等同$ mvn package -Dmaven.test.skip=true -->
+        <!-- <maven.test.skip>true</maven.test.skip> -->
+        <!-- surefire plugin方式跳过maven test， 等同$ mvn package -DskipTests -->
+        <skiptests>true</skiptests>
     </properties>
 
     <dependencies>
@@ -38,13 +42,6 @@
                     <artifactId>tomcat-jdbc</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <!-- druid阿里巴巴数据库连接池 -->
-        <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.1.10</version>
         </dependency>
 
         <dependency>
@@ -67,22 +64,7 @@
             <artifactId>velocity-engine-core</artifactId>
             <version>2.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>2.3.28</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

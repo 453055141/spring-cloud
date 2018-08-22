@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zk.mapper.master.PrizeUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zk.entity.master.PrizeUser">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="prize_id" property="prizeId" />
+        <result column="cd_key" property="cdKey" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="use_time" property="useTime" />
+    </resultMap>
+
+</mapper>

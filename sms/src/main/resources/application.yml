@@ -27,14 +27,31 @@ spring:
           destination: testTopic # 表示要使用的Exchange名称定义
           content-type: application/json # 设置消息类型，本次为对象json，如果是文本则设置“text/plain”
           binder: defaultRabbit # 设置要绑定的消息服务的具体设置
-  shard
-    datasource:
-      dynamic:
-        master:
+  datasource:
+    dynamic:
+      master:
+        username: zengkai
+        password: 1992111
+        driver-class-name: com.mysql.jbc.Driver
+        url: jdbc:mysql://119.23.106.184:3306/zk_project??useUnicode=true&amp;characterEncoding=utf8&amp;emptyStringsConvertToZero=true
+        type: com.alibaba.druid.pool.DruidDataSource
+        initial-size: 1
+        min-idle: 3
+        max-wait: 600
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        poolPreparedStatements: true
+
+      slave:
+        one:
+          max-active: 20
           username: zengkai
           password: 1992111
           driver-class-name: com.mysql.jbc.Driver
-          url: jdbc:mysql://119.23.106.184:3306/zk_project??useUnicode=true&amp;characterEncoding=utf8&amp;emptyStringsConvertToZero=true
+          url: jdbc:mysql://119.23.106.184:3306/zk_project_two??useUnicode=true&amp;characterEncoding=utf8&amp;emptyStringsConvertToZero=true
           type: com.alibaba.druid.pool.DruidDataSource
           initial-size: 1
           min-idle: 3
@@ -45,40 +62,22 @@ spring:
           test-on-borrow: false
           test-on-return: false
           poolPreparedStatements: true
-
-        slave:
-          one:
-            max-active: 20
-            username: zengkai
-            password: 1992111
-            driver-class-name: com.mysql.jbc.Driver
-            url: jdbc:mysql://119.23.106.184:3306/zk_project_two??useUnicode=true&amp;characterEncoding=utf8&amp;emptyStringsConvertToZero=true
-            type: com.alibaba.druid.pool.DruidDataSource
-            initial-size: 1
-            min-idle: 3
-            max-wait: 600
-            time-between-eviction-runs-millis: 60000
-            min-evictable-idle-time-millis: 300000
-            test-while-idle: true
-            test-on-borrow: false
-            test-on-return: false
-            poolPreparedStatements: true
-          two:
-            max-active: 20
-            username: zengkai
-            password: 1992111
-            driver-class-name: com.mysql.jbc.Driver
-            url: jdbc:mysql://119.23.106.184:3306/sks_star??useUnicode=true&amp;characterEncoding=utf8&amp;emptyStringsConvertToZero=true
-            type: com.alibaba.druid.pool.DruidDataSource
-            initial-size: 1
-            min-idle: 3
-            max-wait: 600
-            time-between-eviction-runs-millis: 60000
-            min-evictable-idle-time-millis: 300000
-            test-while-idle: true
-            test-on-borrow: false
-            test-on-return: false
-            poolPreparedStatements: true
+        two:
+          max-active: 20
+          username: zengkai
+          password: 1992111
+          driver-class-name: com.mysql.jbc.Driver
+          url: jdbc:mysql://119.23.106.184:3306/sks_star??useUnicode=true&amp;characterEncoding=utf8&amp;emptyStringsConvertToZero=true
+          type: com.alibaba.druid.pool.DruidDataSource
+          initial-size: 1
+          min-idle: 3
+          max-wait: 600
+          time-between-eviction-runs-millis: 60000
+          min-evictable-idle-time-millis: 300000
+          test-while-idle: true
+          test-on-borrow: false
+          test-on-return: false
+          poolPreparedStatements: true
 #启用断路器
 feige:
   hystrix:
@@ -87,4 +86,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream
+        include: hystrix.service
