@@ -3,7 +3,7 @@
     debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
 <configuration debug="false">
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-    <property name="LOG_HOME" value="./log"/>
+    <property name="LOG_HOME" value="./log/sso.log"/>
     <!--读取spring容器中的属性，这里是获取项目名称和运行的服务器IP-->
     <springProperty scope="context" name="springAppName" source="spring.application.name" />
     <!--<springProperty scope="context" name="ip" source="spring.cloud.client.ipAddress" />-->
@@ -66,10 +66,22 @@
             <!--日志文件保留天数-->
             <MaxHistory>5</MaxHistory>
         </rollingPolicy>
+        <!-- <onMatch>:表示匹配；<onMismatch>：表示不匹配；
+        ACCEPT：表示直接记录日志，无需参考下一个filter；
+        DENY：表示直接被抛弃，不被记录也无需参考下一个filter；
+        NEUTRAL：由下一个filter判断，如果没有下一个filter，那么会直接记录 -->
         <!--这里设置日志级别为info-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>debug</level>
+            <level>info</level>
             <onMatch>ACCEPT</onMatch>
+            <!--由下一个filter判断，如果没有下一个filter，那么会直接记录-->
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>debug</level>
+            <!--直接记录无需参考下一个filter-->
+            <onMatch>ACCEPT</onMatch>
+            <!--直接被抛弃，不被记录也无需参考下一个filter-->
             <onMismatch>DENY</onMismatch>
         </filter>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -91,11 +103,16 @@
             <!--日志文件保留天数-->
             <MaxHistory>10</MaxHistory>
         </rollingPolicy>
-        <!--这里设置日志级别为error-->
+        <!--这里设置日志级别为非info-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>error</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
+            <level>info</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>NEUTRAL</onMismatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>debug</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
         </filter>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->

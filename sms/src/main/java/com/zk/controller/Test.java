@@ -2,6 +2,7 @@ package com.zk.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("sms")
 public class Test {
     private static final Logger log  = LoggerFactory.getLogger(Test.class);
+
+    @Autowired
+    private
+
     @RequestMapping(value = "test",method = RequestMethod.GET)
     public String getSmsTest(@RequestParam("sms") String sms){
         log.info("8764");
