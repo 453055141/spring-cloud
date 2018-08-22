@@ -12,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author zengkai
- * @since 2018-08-21
+ * @since 2018-08-22
  */
 @TableName("d_user_login")
 public class DUserLogin extends Model<DUserLogin> {

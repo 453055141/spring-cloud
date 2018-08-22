@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author zengkai
- * @since 2018-08-21
+ * @since 2018-08-22
  */
 @TableName("prize_user")
 public class PrizeUser extends Model<PrizeUser> {
