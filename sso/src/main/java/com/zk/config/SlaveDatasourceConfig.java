@@ -3,6 +3,8 @@ package com.zk.config;
 import com.baomidou.mybatisplus.extension.MybatisSqlSessionTemplate;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,7 +31,7 @@ public class SlaveDatasourceConfig {
 
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
-        MybatisSqlSessionFactoryBean factoryBean = new MybatisSqlSessionFactoryBean();
+        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(ds);
         //指定mapper xml目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -39,8 +41,8 @@ public class SlaveDatasourceConfig {
     }
 
     @Bean
-    public MybatisSqlSessionTemplate sqlSessionTemplate() throws Exception {
-        MybatisSqlSessionTemplate template = new MybatisSqlSessionTemplate(sqlSessionFactory()); // 使用上面配置的Factory
+    public SqlSessionTemplate sqlSessionTemplate() throws Exception {
+        SqlSessionTemplate template = new SqlSessionTemplate(sqlSessionFactory()); // 使用上面配置的Factory
         return template;
     }
 

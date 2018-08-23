@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class Test {
     private static final Logger log  = LoggerFactory.getLogger(Test.class);
 
-    @Autowired
-    private
 
     @RequestMapping(value = "test",method = RequestMethod.GET)
     public String getSmsTest(@RequestParam("sms") String sms){

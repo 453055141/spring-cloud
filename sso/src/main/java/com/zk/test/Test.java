@@ -2,7 +2,6 @@ package com.zk.test;
 
 import com.zk.feignapi.SendService;
 import com.zk.feignapi.SendSmsService;
-import com.zk.stream.MessageProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,11 +30,11 @@ public class Test {
     @Autowired
     private SendService sendService;
 
-    @Autowired
-    private MessageProvider messageProvider;
+//    @Autowired
+//    private MessageProvider messageProvider;
 
-    @Value("${name}")
-    String name;
+//    @Value("${name}")
+//    String name;
 
     @RequestMapping("test1")
     public String getTest1(){
@@ -52,20 +51,20 @@ public class Test {
         return sendService.sendSms("sso服务消息");
     }
 
-    @RequestMapping("test4")
-    public String getTest4(){
-        Map map = new HashMap();
-        map.put("name","zk");
-        map.put("age",27);
-        messageProvider.send(map);
-        return "ok";
-    }
+//    @RequestMapping("test4")
+//    public String getTest4(){
+//        Map map = new HashMap();
+//        map.put("name","zk");
+//        map.put("age",27);
+//        messageProvider.send(map);
+//        return "ok";
+//    }
 
-    @RequestMapping("test5")
-    public String getTest5(){
-        log.info(name);
-        return name;
-    }
+//    @RequestMapping("test5")
+//    public String getTest5(){
+//        log.info(name);
+//        return name;
+//    }
 
     @RequestMapping("test6")
     public String getTest6(){

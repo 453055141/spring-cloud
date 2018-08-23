@@ -1,7 +1,7 @@
 package com.zk.mapper.master;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zk.entity.master.DUserLogin;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
@@ -9,7 +9,7 @@ import com.zk.entity.master.DUserLogin;
  * </p>
  *
  * @author zengkai
- * @since 2018-08-22
+ * @since 2018-08-23
  */
 public interface DUserLoginMapper extends BaseMapper<DUserLogin> {
 

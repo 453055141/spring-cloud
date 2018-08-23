@@ -1,12 +1,11 @@
 package com.zk.entity.master;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -14,7 +13,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author zengkai
- * @since 2018-08-22
+ * @since 2018-08-23
  */
 public class Prize extends Model<Prize> {
 
@@ -25,40 +24,48 @@ public class Prize extends Model<Prize> {
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
     /**
      * 奖品名字
      */
     @TableField("prize_name")
     private String prizeName;
+
     /**
      * 奖品数量
      */
     @TableField("prize_num")
     private Integer prizeNum;
+
     /**
      * 剩余数量
      */
     @TableField("residue_num")
     private Integer residueNum;
+
     /**
      * 指定中奖的用户
      */
     @TableField("user_id")
     private String userId;
+
     /**
      * 中奖概率 n%
      */
     @TableField("prize_prob")
     private Double prizeProb;
+
     /**
      * 领奖的有效时间
      */
     @TableField("lottery_exp")
     private LocalDateTime lotteryExp;
+
     /**
      * 奖品状态：0不启用；1启用
      */
     private Boolean status;
+
     /**
      * 创建时间
      */

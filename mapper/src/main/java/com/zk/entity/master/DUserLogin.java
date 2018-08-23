@@ -1,12 +1,11 @@
 package com.zk.entity.master;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -14,7 +13,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author zengkai
- * @since 2018-08-22
+ * @since 2018-08-23
  */
 @TableName("d_user_login")
 public class DUserLogin extends Model<DUserLogin> {
@@ -26,68 +25,86 @@ public class DUserLogin extends Model<DUserLogin> {
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
     /**
      * 用户编号
      */
     private Long uid;
+
     /**
      * 账号
      */
     private String account;
+
     private String name;
+
     /**
      * 性别
      */
     private Integer sex;
+
     /**
      * 手机类型
      */
     private Integer type;
+
     /**
      * 等级
      */
     private Integer level;
+
     /**
      * 元宝
      */
     private Long money;
+
     /**
      * 当前钻石
      */
     private Integer diamond;
+
     /**
      * 紫水晶数量
      */
     private Integer purple;
+
     /**
      * 绿水晶数量
      */
     private Integer green;
+
     /**
      * 积分
      */
     private Integer score;
+
     /**
      * 累计充值钻石
      */
     private Integer totalDiamond;
+
     /**
      * 时间
      */
     private LocalDateTime time;
+
     /**
      * 扩展附件
      */
     private String annex;
+
     /**
      * 渠道号
      */
     private String channel;
+
     /**
      * 设备id
      */
     private String device;
+
     private Integer serverId;
+
     private String ip;
 
 

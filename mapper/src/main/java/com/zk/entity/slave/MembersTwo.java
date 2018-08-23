@@ -1,13 +1,12 @@
 package com.zk.entity.slave;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author zengkai
- * @since 2018-08-22
+ * @since 2018-08-23
  */
 @TableName("members_two")
 public class MembersTwo extends Model<MembersTwo> {
@@ -27,44 +26,53 @@ public class MembersTwo extends Model<MembersTwo> {
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
     /**
      * 登录用户名
      */
     @TableField("login_name")
     private String loginName;
+
     /**
      * 登录密码
      */
     @TableField("login_password")
     private String loginPassword;
+
     /**
      * 会员名字
      */
     @TableField("user_name")
     private String userName;
+
     /**
      * 电话
      */
     private String phone;
+
     /**
      * 身份证号码
      */
     @TableField("id_card_no")
     private String idCardNo;
+
     /**
      * 1是男 0是女
      */
     private Boolean sex;
+
     /**
      * 创建时间
      */
     @TableField("registration_time")
     private LocalDateTime registrationTime;
+
     /**
      * 注销时间
      */
     @TableField("cancel_time")
     private LocalDateTime cancelTime;
+
     /**
      * 更新时间
      */

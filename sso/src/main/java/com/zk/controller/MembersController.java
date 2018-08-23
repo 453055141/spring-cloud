@@ -3,6 +3,7 @@ package com.zk.controller;
 
 import com.zk.mapper.master.MembersMapper;
 import com.zk.mapper.slave.MembersTwoMapper;
+import com.zk.service.IMembersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,17 +21,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/members")
 public class MembersController {
 
-    @Autowired
-    private MembersMapper membersMapper;
+
 
     @Autowired
-    private MembersTwoMapper membersTwoMapper;
+    private IMembersService iMembersService;
 
     @GetMapping("test")
     public String test(){
-        int a=membersMapper.deleteById(8);
-        int b=membersTwoMapper.deleteById(4);
-        int c=8/0;
+        iMembersService.delete(4);
         return "ok";
     }
 

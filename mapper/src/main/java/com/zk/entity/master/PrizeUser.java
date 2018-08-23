@@ -1,13 +1,12 @@
 package com.zk.entity.master;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author zengkai
- * @since 2018-08-22
+ * @since 2018-08-23
  */
 @TableName("prize_user")
 public class PrizeUser extends Model<PrizeUser> {
@@ -27,30 +26,36 @@ public class PrizeUser extends Model<PrizeUser> {
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
     /**
      * 用户ID
      */
     @TableField("user_id")
     private Integer userId;
+
     /**
      * 奖品ID
      */
     @TableField("prize_id")
     private Integer prizeId;
+
     /**
      * 奖品兑换码
      */
     @TableField("cd_key")
     private String cdKey;
+
     /**
      * 兑换码状态：0未使用；1使用
      */
     private Boolean status;
+
     /**
      * 获得时间
      */
     @TableField("create_time")
     private LocalDateTime createTime;
+
     /**
      * 使用时间
      */

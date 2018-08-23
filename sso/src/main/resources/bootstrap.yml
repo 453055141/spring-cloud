@@ -39,23 +39,23 @@ spring:
           destination: testTopic  # 表示要使用的Exchange名称定义(主题、目的地)
           content-type: application/json # 设置消息类型，本次为对象json，如果是文本则设置“text/plain”
           binder: defaultRabbit # 设置要绑定的消息服务的具体设置
-    config:
-      fail-fast: true
-      label: master
-      profile: dev
-#      uri: http://127.0.0.1:8768/
-      discovery:
-        enabled: true
-        service-id: config
-      bus:
-        enabled: true
-        trace:
-          enabled: true
-    rabbitmq:
-      host: 127.0.0.1
-      port: 5672
-      username: zengkai
-      password: 123456
+#    config:
+#      fail-fast: true
+#      label: master
+#      profile: dev
+##      uri: http://127.0.0.1:8768/
+#      discovery:
+#        enabled: true
+#        service-id: config
+#      bus:
+#        enabled: true
+#        trace:
+#          enabled: true
+#    rabbitmq:
+#      host: 127.0.0.1
+#      port: 5672
+#      username: zengkai
+#      password: 123456
 #启用断路器
 feign:
   hystrix:

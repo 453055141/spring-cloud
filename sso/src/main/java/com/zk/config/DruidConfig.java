@@ -32,7 +32,7 @@ public class DruidConfig {
     @Bean(name = "masterDataSource")
     @Primary
     @Autowired
-    public DataSource systemDataSource(Environment env) {
+    public AtomikosDataSourceBean systemDataSource(Environment env) {
         AtomikosDataSourceBean ds = new AtomikosDataSourceBean();
         Properties prop = build(env, "spring.datasource.druid.master.");
         ds.setXaDataSourceClassName("com.alibaba.druid.pool.xa.DruidXADataSource");

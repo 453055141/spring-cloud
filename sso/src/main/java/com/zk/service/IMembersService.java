@@ -13,4 +13,5 @@ import com.zk.entity.master.Members;
  */
 public interface IMembersService extends IService<Members> {
 
+    public int delete(Integer id);
 }

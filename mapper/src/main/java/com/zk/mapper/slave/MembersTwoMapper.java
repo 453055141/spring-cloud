@@ -1,7 +1,7 @@
 package com.zk.mapper.slave;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zk.entity.slave.MembersTwo;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
@@ -9,7 +9,7 @@ import com.zk.entity.slave.MembersTwo;
  * </p>
  *
  * @author zengkai
- * @since 2018-08-22
+ * @since 2018-08-23
  */
 public interface MembersTwoMapper extends BaseMapper<MembersTwo> {
 

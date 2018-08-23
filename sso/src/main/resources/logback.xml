@@ -26,36 +26,36 @@
         </encoder>
     </appender>
 
-    <appender name="logstash"
-              class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>127.0.0.1:9601</destination>
-        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <timestamp>
-                    <timeZone>UTC</timeZone>
-                </timestamp>
-                <pattern>
-                    <pattern>
-                        {
-                        "timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",
-                        "service": "${springAppName:-}",
-                        "trace": "%X{X-B3-TraceId:-}",
-                        "span": "%X{X-B3-SpanId:-}",
-                        "exportable": "%X{X-Span-Export:-}",
-                        "thread": "%thread",
-                        "level": "%level",
-                        "logger_name": "%logger",
-                        "class_name": "%class",
-                        "method_name": "%method",
-                        "line_number": "%line",
-                        "stack_trace": "%exception{5}",
-                        "message": "%message"
-                        }
-                    </pattern>
-                </pattern>
-            </providers>
-        </encoder>
-    </appender>
+    <!--<appender name="logstash"-->
+              <!--class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+        <!--<destination>127.0.0.1:9601</destination>-->
+        <!--<encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
+            <!--<providers>-->
+                <!--<timestamp>-->
+                    <!--<timeZone>UTC</timeZone>-->
+                <!--</timestamp>-->
+                <!--<pattern>-->
+                    <!--<pattern>-->
+                        <!--{-->
+                        <!--"timestamp": "%d{yyyy-MM-dd HH:mm:ss.SSS}",-->
+                        <!--"service": "${springAppName:-}",-->
+                        <!--"trace": "%X{X-B3-TraceId:-}",-->
+                        <!--"span": "%X{X-B3-SpanId:-}",-->
+                        <!--"exportable": "%X{X-Span-Export:-}",-->
+                        <!--"thread": "%thread",-->
+                        <!--"level": "%level",-->
+                        <!--"logger_name": "%logger",-->
+                        <!--"class_name": "%class",-->
+                        <!--"method_name": "%method",-->
+                        <!--"line_number": "%line",-->
+                        <!--"stack_trace": "%exception{5}",-->
+                        <!--"message": "%message"-->
+                        <!--}-->
+                    <!--</pattern>-->
+                <!--</pattern>-->
+            <!--</providers>-->
+        <!--</encoder>-->
+    <!--</appender>-->
 
 
     <!-- 按照每天生成日志文件 -->
@@ -150,7 +150,7 @@
     是否像上级传递，即是否向root传递，传递则采用root的输出源，否则不输出日志 -->
     <root level="debug">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="logstash"/>
+        <!--<appender-ref ref="logstash"/>-->
         <appender-ref ref="DAYINFO"/>
         <appender-ref ref="DAYERROR"/>
     </root>

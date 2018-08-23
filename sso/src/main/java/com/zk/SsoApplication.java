@@ -14,7 +14,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableCircuitBreaker
 //断路器仪表盘
 @EnableHystrixDashboard
-@RefreshScope
 @SpringBootApplication
 public class SsoApplication {
 
