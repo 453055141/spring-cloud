@@ -13,11 +13,15 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.jta.JtaTransactionManager;
 
 import javax.sql.DataSource;
+import javax.transaction.SystemException;
+import javax.transaction.TransactionManager;
 import javax.transaction.UserTransaction;
 import java.util.Properties;
 
@@ -29,81 +33,31 @@ import java.util.Properties;
 @Configuration
 public class DruidConfig {
 
-    @Bean(name = "masterDataSource")
-    @Primary
-    @Autowired
-    public AtomikosDataSourceBean systemDataSource(Environment env) {
-        AtomikosDataSourceBean ds = new AtomikosDataSourceBean();
-        Properties prop = build(env, "spring.datasource.druid.master.");
-        ds.setXaDataSourceClassName("com.alibaba.druid.pool.xa.DruidXADataSource");
-        ds.setUniqueResourceName("master");
-        ds.setPoolSize(5);
-        ds.setXaProperties(prop);
-        return ds;
-
-    }
-
-    @Autowired
-    @Bean(name = "slaveDataSource")
-    public AtomikosDataSourceBean businessDataSource(Environment env) {
-
-        AtomikosDataSourceBean ds = new AtomikosDataSourceBean();
-        Properties prop = build(env, "spring.datasource.druid.slave.");
-        ds.setXaDataSourceClassName("com.alibaba.druid.pool.xa.DruidXADataSource");
-        ds.setUniqueResourceName("slave");
-        ds.setPoolSize(5);
-        ds.setXaProperties(prop);
-
-        return ds;
-    }
-
 
     /**
-     * 注入事物管理器
+     * 自定义事务
+     * MyBatis自动参与到spring事务管理中，无需额外配置，只要org.mybatis.spring.SqlSessionFactoryBean引用的数据源与DataSourceTransactionManager引用的数据源一致即可，否则事务管理会不起作用。
      * @return
      */
-    @Bean(name = "xatx")
-    public JtaTransactionManager regTransactionManager () {
+    @Bean(name = "userTransaction")
+    public UserTransaction userTransaction() throws Throwable {
+        UserTransactionImp userTransactionImp = new UserTransactionImp();
+        userTransactionImp.setTransactionTimeout(10000);
+        return userTransactionImp;
+    }
+    @Bean(name = "atomikosTransactionManager", destroyMethod = "close", initMethod = "init")
+    public TransactionManager atomikosTransactionManager() throws Throwable {
         UserTransactionManager userTransactionManager = new UserTransactionManager();
-        UserTransaction userTransaction = new UserTransactionImp();
-        return new JtaTransactionManager(userTransaction, userTransactionManager);
+        userTransactionManager.setForceShutdown(false);
+        return userTransactionManager;
     }
-
-
-
-    private Properties build(Environment env, String prefix) {
-
-        Properties prop = new Properties();
-        prop.put("url", env.getProperty(prefix + "url"));
-        prop.put("username", env.getProperty(prefix + "username"));
-        prop.put("password", env.getProperty(prefix + "password"));
-        prop.put("driverClassName", env.getProperty(prefix + "driverClassName", ""));
-        prop.put("initialSize", env.getProperty(prefix + "initialSize", Integer.class));
-        prop.put("maxActive", env.getProperty(prefix + "maxActive", Integer.class));
-        prop.put("minIdle", env.getProperty(prefix + "minIdle", Integer.class));
-        prop.put("maxWait", env.getProperty(prefix + "maxWait", Integer.class));
-        prop.put("poolPreparedStatements", env.getProperty(prefix + "poolPreparedStatements", Boolean.class));
-
-        prop.put("maxPoolPreparedStatementPerConnectionSize",
-                env.getProperty(prefix + "maxPoolPreparedStatementPerConnectionSize", Integer.class));
-
-        prop.put("maxPoolPreparedStatementPerConnectionSize",
-                env.getProperty(prefix + "maxPoolPreparedStatementPerConnectionSize", Integer.class));
-        prop.put("validationQuery", env.getProperty(prefix + "validationQuery"));
-        prop.put("validationQueryTimeout", env.getProperty(prefix + "validationQueryTimeout", Integer.class));
-        prop.put("testOnBorrow", env.getProperty(prefix + "testOnBorrow", Boolean.class));
-        prop.put("testOnReturn", env.getProperty(prefix + "testOnReturn", Boolean.class));
-        prop.put("testWhileIdle", env.getProperty(prefix + "testWhileIdle", Boolean.class));
-        prop.put("timeBetweenEvictionRunsMillis",
-                env.getProperty(prefix + "timeBetweenEvictionRunsMillis", Integer.class));
-        prop.put("minEvictableIdleTimeMillis", env.getProperty(prefix + "minEvictableIdleTimeMillis", Integer.class));
-        prop.put("filters", env.getProperty(prefix + "filters"));
-
-        return prop;
+    @Bean(name = "transactionManager")
+    @DependsOn({ "userTransaction", "atomikosTransactionManager" })
+    public PlatformTransactionManager transactionManager() throws Throwable {
+        UserTransaction userTransaction = userTransaction();
+        JtaTransactionManager manager = new JtaTransactionManager(userTransaction,atomikosTransactionManager());
+        return manager;
     }
-
-
-
 
 
 

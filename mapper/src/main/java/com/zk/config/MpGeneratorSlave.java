@@ -136,7 +136,7 @@ public class MpGeneratorSlave {
         focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return path+"/src/main/resources/mapper/slave/" + tableInfo.getEntityName() + ".xml";
+                return path+"/src/main/resources/mapper/slave/" + tableInfo.getEntityName() + "Mapper.xml";
             }
         });
         cfg.setFileOutConfigList(focList);

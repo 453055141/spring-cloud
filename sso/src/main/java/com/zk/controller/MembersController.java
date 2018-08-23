@@ -1,6 +1,7 @@
 package com.zk.controller;
 
 
+import com.zk.entity.master.Members;
 import com.zk.mapper.master.MembersMapper;
 import com.zk.mapper.slave.MembersTwoMapper;
 import com.zk.service.IMembersService;
@@ -30,6 +31,12 @@ public class MembersController {
     public String test(){
         iMembersService.delete(4);
         return "ok";
+    }
+
+    @GetMapping("test1")
+    public Members test1(){
+        Members members = iMembersService.get(4);
+        return members;
     }
 
 }

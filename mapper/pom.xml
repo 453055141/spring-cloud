@@ -58,8 +58,29 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <classifier>exec</classifier>
+                </configuration>
             </plugin>
         </plugins>
+        <!--<resources>-->
+            <!--&lt;!&ndash;<resource>&ndash;&gt;-->
+                <!--&lt;!&ndash;<directory>src/main/java</directory>&ndash;&gt;-->
+                <!--&lt;!&ndash;<includes>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<include>**/*.properties</include>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<include>**/*.xml</include>&ndash;&gt;-->
+                <!--&lt;!&ndash;</includes>&ndash;&gt;-->
+                <!--&lt;!&ndash;<filtering>false</filtering>&ndash;&gt;-->
+            <!--&lt;!&ndash;</resource>&ndash;&gt;-->
+            <!--<resource>-->
+                <!--<directory>src/main/resources</directory>-->
+                <!--<includes>-->
+                    <!--<include>**/*.properties</include>-->
+                    <!--<include>**/*.xml</include>-->
+                <!--</includes>-->
+                <!--<filtering>true</filtering>-->
+            <!--</resource>-->
+        <!--</resources>-->
     </build>
 
 

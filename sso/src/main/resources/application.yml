@@ -7,7 +7,7 @@ spring:
         username: zengkai
         password: 1992111
         url: jdbc:mysql://119.23.106.184:3306/zk_project?useUnicode=true&characterEncoding=utf8
-        driver-class-name: com.mysql.jdbc.Driver
+        driverClassName: com.mysql.jdbc.Driver
         # 下面为连接池的补充设置，应用到上面所有数据源中
         # 初始化大小，最小，最大
         initialSize: 5
@@ -38,7 +38,7 @@ spring:
         username: zengkai
         password: 1992111
         url: jdbc:mysql://119.23.106.184:3306/zk_project_two?useUnicode=true&characterEncoding=utf8
-        driver-class-name: com.mysql.jdbc.Driver
+        driverClassName: com.mysql.jdbc.Driver
         # 下面为连接池的补充设置，应用到上面所有数据源中
         # 初始化大小，最小，最大
         initialSize: 5
