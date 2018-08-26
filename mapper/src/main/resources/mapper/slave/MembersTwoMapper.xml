@@ -3,7 +3,7 @@
 <mapper namespace="com.zk.mapper.slave.MembersTwoMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.zk.entity.slave.MembersTwo">
+    <resultMap id="BaseResultMap" type="com.zk.entity.entity.slave.MembersTwo">
         <id column="id" property="id" />
         <result column="login_name" property="loginName" />
         <result column="login_password" property="loginPassword" />

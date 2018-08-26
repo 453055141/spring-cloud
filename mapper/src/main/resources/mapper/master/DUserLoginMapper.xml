@@ -3,7 +3,7 @@
 <mapper namespace="com.zk.mapper.master.DUserLoginMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.zk.entity.master.DUserLogin">
+    <resultMap id="BaseResultMap" type="com.zk.entity.entity.master.DUserLogin">
         <id column="id" property="id" />
         <result column="uid" property="uid" />
         <result column="account" property="account" />
