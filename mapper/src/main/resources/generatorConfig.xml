@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <classPathEntry
+            location="B:\KFGJ\maven\repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar" />
+
+    <context id="mysqlgenerator" targetRuntime="MyBatis3">
+
+
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否-->
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- 数据库A -->
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://119.23.106.184:3306/zk_project?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="zengkai"
+                        password="1992111" />
+
+        <javaModelGenerator targetPackage="com.zk.entity.master" targetProject="src/main/java" />
+
+        <sqlMapGenerator targetPackage="mapper.master" targetProject="src/main/resources" />
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zk.mapper.master" targetProject="src/main/java" />
+
+        <table tableName="members" domainObjectName="Members" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="prize" domainObjectName="Prize" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="prize_user" domainObjectName="PrizeUser" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+
+
+        <!-- 数据库B -->
+
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+                        <!--connectionURL="jdbc:mysql://119.23.106.184:3306/zk_project_two?useUnicode=true&amp;characterEncoding=UTF-8"-->
+                        <!--userId="zengkai"-->
+                        <!--password="1992111" />-->
+
+        <!--<javaModelGenerator targetPackage="com.zk.zkbootpojo.entity.clusterModel" targetProject="src/main/java" />-->
+
+        <!--<sqlMapGenerator targetPackage="com.zk.zkbootpojo.mapper.clusterMapper" targetProject="src/main/resources" />-->
+
+        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.zk.zkbootpojo.mapper.clusterMapper" targetProject="src/main/java" />-->
+
+        <!--<table tableName="members_two"/>-->
+
+    </context>
+
+</generatorConfiguration>

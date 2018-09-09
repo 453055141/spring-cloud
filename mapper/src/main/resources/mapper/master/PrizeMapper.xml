@@ -1,18 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zk.mapper.master.PrizeMapper">
-
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.zk.entity.entity.master.Prize">
-        <id column="id" property="id" />
-        <result column="prize_name" property="prizeName" />
-        <result column="prize_num" property="prizeNum" />
-        <result column="residue_num" property="residueNum" />
-        <result column="user_id" property="userId" />
-        <result column="prize_prob" property="prizeProb" />
-        <result column="lottery_exp" property="lotteryExp" />
-        <result column="status" property="status" />
-        <result column="creat_time" property="creatTime" />
-    </resultMap>
-
+  <resultMap id="BaseResultMap" type="com.zk.entity.master.Prize">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="prize_name" jdbcType="VARCHAR" property="prizeName" />
+    <result column="prize_num" jdbcType="INTEGER" property="prizeNum" />
+    <result column="residue_num" jdbcType="INTEGER" property="residueNum" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="prize_prob" jdbcType="DOUBLE" property="prizeProb" />
+    <result column="lottery_exp" jdbcType="TIMESTAMP" property="lotteryExp" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, prize_name, prize_num, residue_num, user_id, prize_prob, lottery_exp, status, 
+    creat_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prize
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prize
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zk.entity.master.Prize">
+    insert into prize (id, prize_name, prize_num, 
+      residue_num, user_id, prize_prob, 
+      lottery_exp, status, creat_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{prizeName,jdbcType=VARCHAR}, #{prizeNum,jdbcType=INTEGER}, 
+      #{residueNum,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{prizeProb,jdbcType=DOUBLE}, 
+      #{lotteryExp,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT}, #{creatTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zk.entity.master.Prize">
+    insert into prize
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="prizeName != null">
+        prize_name,
+      </if>
+      <if test="prizeNum != null">
+        prize_num,
+      </if>
+      <if test="residueNum != null">
+        residue_num,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="prizeProb != null">
+        prize_prob,
+      </if>
+      <if test="lotteryExp != null">
+        lottery_exp,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="creatTime != null">
+        creat_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prizeName != null">
+        #{prizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeNum != null">
+        #{prizeNum,jdbcType=INTEGER},
+      </if>
+      <if test="residueNum != null">
+        #{residueNum,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeProb != null">
+        #{prizeProb,jdbcType=DOUBLE},
+      </if>
+      <if test="lotteryExp != null">
+        #{lotteryExp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="creatTime != null">
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zk.entity.master.Prize">
+    update prize
+    <set>
+      <if test="prizeName != null">
+        prize_name = #{prizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeNum != null">
+        prize_num = #{prizeNum,jdbcType=INTEGER},
+      </if>
+      <if test="residueNum != null">
+        residue_num = #{residueNum,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeProb != null">
+        prize_prob = #{prizeProb,jdbcType=DOUBLE},
+      </if>
+      <if test="lotteryExp != null">
+        lottery_exp = #{lotteryExp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="creatTime != null">
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zk.entity.master.Prize">
+    update prize
+    set prize_name = #{prizeName,jdbcType=VARCHAR},
+      prize_num = #{prizeNum,jdbcType=INTEGER},
+      residue_num = #{residueNum,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR},
+      prize_prob = #{prizeProb,jdbcType=DOUBLE},
+      lottery_exp = #{lotteryExp,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

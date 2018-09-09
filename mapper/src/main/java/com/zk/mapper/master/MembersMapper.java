@@ -1,16 +1,17 @@
 package com.zk.mapper.master;
 
 import com.zk.entity.master.Members;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-/**
- * <p>
- *  Mapper 接口
- * </p>
- *
- * @author zengkai
- * @since 2018-08-23
- */
-public interface MembersMapper extends BaseMapper<Members> {
+public interface MembersMapper {
+    int deleteByPrimaryKey(Integer id);
 
+    int insert(Members record);
+
+    int insertSelective(Members record);
+
+    Members selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(Members record);
+
+    int updateByPrimaryKey(Members record);
 }

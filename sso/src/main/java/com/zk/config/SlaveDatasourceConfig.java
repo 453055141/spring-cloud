@@ -1,23 +1,16 @@
 package com.zk.config;
 
-import com.baomidou.mybatisplus.extension.MybatisSqlSessionTemplate;
-import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.jta.atomikos.AtomikosDataSourceBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.core.io.support.ResourcePatternResolver;
 
-import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
@@ -41,7 +34,6 @@ public class SlaveDatasourceConfig {
     public AtomikosDataSourceBean masterDataSource(Environment env) {
         AtomikosDataSourceBean atomikosDataSourceBean = new AtomikosDataSourceBean();
         atomikosDataSourceBean.setXaDataSourceClassName("com.alibaba.druid.pool.xa.DruidXADataSource");
-
         atomikosDataSourceBean.setUniqueResourceName("slave");
         atomikosDataSourceBean.setPoolSize(5);
         atomikosDataSourceBean.setReapTimeout(20000);
@@ -54,13 +46,13 @@ public class SlaveDatasourceConfig {
     //创建Session -事务
     @Bean(name = "slaveSqlSessionFactory")
     public SqlSessionFactory masterSqlSessionFactory(@Qualifier("slaveDataSource") AtomikosDataSourceBean atomikosDataSourceBean) {
-        final MybatisSqlSessionFactoryBean sessionFactory = new MybatisSqlSessionFactoryBean();
+        final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         SqlSessionFactory sqlSessionFactory = null;
         try {
             //单例
             sessionFactory.setDataSource(atomikosDataSourceBean);
             sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
-                    .getResources(MasterDataSourceConfig.MAPPER_LOCATION));
+                    .getResources(SlaveDatasourceConfig.MAPPER_LOCATION));
             sqlSessionFactory = sessionFactory.getObject();
         } catch (Exception e) {
             log.error("数据库连接错误", e);

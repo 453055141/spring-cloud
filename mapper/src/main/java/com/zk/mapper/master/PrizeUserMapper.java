@@ -1,16 +1,17 @@
 package com.zk.mapper.master;
 
 import com.zk.entity.master.PrizeUser;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-/**
- * <p>
- *  Mapper 接口
- * </p>
- *
- * @author zengkai
- * @since 2018-08-23
- */
-public interface PrizeUserMapper extends BaseMapper<PrizeUser> {
+public interface PrizeUserMapper {
+    int deleteByPrimaryKey(Integer id);
 
+    int insert(PrizeUser record);
+
+    int insertSelective(PrizeUser record);
+
+    PrizeUser selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKeySelective(PrizeUser record);
+
+    int updateByPrimaryKey(PrizeUser record);
 }

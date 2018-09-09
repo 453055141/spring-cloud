@@ -1,82 +1,27 @@
 package com.zk.entity.master;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import java.util.Date;
 
-/**
- * <p>
- * 
- * </p>
- *
- * @author zengkai
- * @since 2018-08-23
- */
-public class Members extends Model<Members> {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * 主键ID
-     */
-    @TableId(value = "id", type = IdType.AUTO)
+public class Members {
     private Integer id;
 
-    /**
-     * 登录用户名
-     */
-    @TableField("login_name")
     private String loginName;
 
-    /**
-     * 登录密码
-     */
-    @TableField("login_password")
     private String loginPassword;
 
-    /**
-     * 会员名字
-     */
-    @TableField("user_name")
     private String userName;
 
-    /**
-     * 电话
-     */
     private String phone;
 
-    /**
-     * 身份证号码
-     */
-    @TableField("id_card_no")
     private String idCardNo;
 
-    /**
-     * 1是男 0是女
-     */
     private Boolean sex;
 
-    /**
-     * 创建时间
-     */
-    @TableField("registration_time")
-    private LocalDateTime registrationTime;
+    private Date registrationTime;
 
-    /**
-     * 注销时间
-     */
-    @TableField("cancel_time")
-    private LocalDateTime cancelTime;
+    private Date cancelTime;
 
-    /**
-     * 更新时间
-     */
-    @TableField("update_time")
-    private LocalDateTime updateTime;
-
+    private Date updateTime;
 
     public Integer getId() {
         return id;
@@ -134,48 +79,27 @@ public class Members extends Model<Members> {
         this.sex = sex;
     }
 
-    public LocalDateTime getRegistrationTime() {
+    public Date getRegistrationTime() {
         return registrationTime;
     }
 
-    public void setRegistrationTime(LocalDateTime registrationTime) {
+    public void setRegistrationTime(Date registrationTime) {
         this.registrationTime = registrationTime;
     }
 
-    public LocalDateTime getCancelTime() {
+    public Date getCancelTime() {
         return cancelTime;
     }
 
-    public void setCancelTime(LocalDateTime cancelTime) {
+    public void setCancelTime(Date cancelTime) {
         this.cancelTime = cancelTime;
     }
 
-    public LocalDateTime getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
-    @Override
-    public String toString() {
-        return "Members{" +
-        ", id=" + id +
-        ", loginName=" + loginName +
-        ", loginPassword=" + loginPassword +
-        ", userName=" + userName +
-        ", phone=" + phone +
-        ", idCardNo=" + idCardNo +
-        ", sex=" + sex +
-        ", registrationTime=" + registrationTime +
-        ", cancelTime=" + cancelTime +
-        ", updateTime=" + updateTime +
-        "}";
     }
 }

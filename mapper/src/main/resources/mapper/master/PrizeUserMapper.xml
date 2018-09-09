@@ -1,16 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zk.mapper.master.PrizeUserMapper">
-
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.zk.entity.entity.master.PrizeUser">
-        <id column="id" property="id" />
-        <result column="user_id" property="userId" />
-        <result column="prize_id" property="prizeId" />
-        <result column="cd_key" property="cdKey" />
-        <result column="status" property="status" />
-        <result column="create_time" property="createTime" />
-        <result column="use_time" property="useTime" />
-    </resultMap>
-
+  <resultMap id="BaseResultMap" type="com.zk.entity.master.PrizeUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="prize_id" jdbcType="INTEGER" property="prizeId" />
+    <result column="cd_key" jdbcType="VARCHAR" property="cdKey" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="use_time" jdbcType="TIMESTAMP" property="useTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, prize_id, cd_key, status, create_time, use_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prize_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prize_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zk.entity.master.PrizeUser">
+    insert into prize_user (id, user_id, prize_id, 
+      cd_key, status, create_time, 
+      use_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{prizeId,jdbcType=INTEGER}, 
+      #{cdKey,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{useTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zk.entity.master.PrizeUser">
+    insert into prize_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="prizeId != null">
+        prize_id,
+      </if>
+      <if test="cdKey != null">
+        cd_key,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="useTime != null">
+        use_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="prizeId != null">
+        #{prizeId,jdbcType=INTEGER},
+      </if>
+      <if test="cdKey != null">
+        #{cdKey,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useTime != null">
+        #{useTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zk.entity.master.PrizeUser">
+    update prize_user
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="prizeId != null">
+        prize_id = #{prizeId,jdbcType=INTEGER},
+      </if>
+      <if test="cdKey != null">
+        cd_key = #{cdKey,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useTime != null">
+        use_time = #{useTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zk.entity.master.PrizeUser">
+    update prize_user
+    set user_id = #{userId,jdbcType=INTEGER},
+      prize_id = #{prizeId,jdbcType=INTEGER},
+      cd_key = #{cdKey,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      use_time = #{useTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -8,10 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config" />
+        <module name="demoaaaaa" />
         <module name="elasticsearch" />
         <module name="eureka-service" />
         <module name="gateway" />
         <module name="home" />
+        <module name="home-page" />
         <module name="mapper" />
         <module name="mybatisplus" />
         <module name="sms" />
@@ -25,6 +27,7 @@
     <bytecodeTargetLevel>
       <module name="aaa" target="1.8" />
       <module name="bus" target="1.8" />
+      <module name="demoaaaaa" target="1.8" />
       <module name="mybatisplus-spring-boot" target="1.8" />
       <module name="zk-cloud-configclient" target="1.8" />
       <module name="zk-cloud-configserver" target="1.8" />

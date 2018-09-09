@@ -17,6 +17,7 @@
         <option value="$PROJECT_DIR$/mapper/pom.xml" />
         <option value="$PROJECT_DIR$/mybatisplus/pom.xml" />
         <option value="$PROJECT_DIR$/elasticsearch/pom.xml" />
+        <option value="$PROJECT_DIR$/home-page/pom.xml" />
       </list>
     </option>
   </component>
