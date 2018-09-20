@@ -14,4 +14,6 @@ public interface MembersMapper {
     int updateByPrimaryKeySelective(Members record);
 
     int updateByPrimaryKey(Members record);
+
+    int selectByUserId(Integer userId);
 }
