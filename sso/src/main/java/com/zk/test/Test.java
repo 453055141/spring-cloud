@@ -25,7 +25,7 @@ public class Test {
 
 
     @Autowired
-    private SendSmsService sendSmsService;
+    private SendSmsService  sendSmsService;
 
     @Autowired
     private SendService sendService;
